@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Home - Dashboard</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="dashboard-page">
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="side-brand" href="dashboard.html"><span class="brand-mark">N</span><span>Smart Home</span></a>
+      <nav class="side-nav">
+        <a href="dashboard.html" data-page="dashboard"><span class="nav-symbol"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></span><span>Dashboard</span></a>
+        <a href="sensor-data.html" data-page="sensor"><span class="nav-symbol"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="12" cy="12" r="3"/><path d="M12 3v3m0 12v3m9-9h-3M6 12H3"/></svg></span><span>Datasensor</span></a>
+        <a href="device-history.html" data-page="history"><span class="nav-symbol"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h10a2 2 0 0 1 2 2v14l-5-3-5 3V6a2 2 0 0 1 2-2Z"/><path d="M4 7a2 2 0 0 0-2 2v11l4-2"/></svg></span><span>Action history</span></a>
+        <a href="profile.html" data-page="profile"><span class="nav-symbol"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3"/><path d="M5 21c.8-4 3.1-6 7-6s6.2 2 7 6"/></svg></span><span>Profile</span></a>
+      </nav>
+      <button class="side-logout" type="button" onclick="logout()"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 4H5v16h5"/><path d="m14 8 4 4-4 4m4-4H9"/></svg><span>Log out</span></button>
+    </aside>
+    <main class="workspace">
+      <header class="topbar">
+        <h1>Dashboard</h1>
+        <label class="top-search"><input type="search" placeholder="Search type of keywords"><span>⌕</span></label>
+        <div class="top-actions">
+          <div class="hardware-status-pill online" id="hardwareStatusPill" title="Trạng thái kết nối phần cứng ESP8266">
+            <span class="status-dot"></span>
+            <span id="hardwareStatusText">ESP8266: Trực tuyến</span>
+          </div>
+          <button type="button" title="Hướng dẫn hệ thống">?</button>
+          <button type="button" title="Cài đặt">♟</button>
+          <span class="user-dot"></span>
+          <span class="top-username" id="topUsername">Huyền</span>
+          <span class="chev" aria-hidden="true"></span>
+        </div>
+      </header>
+
+      <!-- Banner cảnh báo khi lap không nhận được tín hiệu từ phần cứng -->
+      <div id="hardwareAlertBanner" class="hardware-alert-banner" role="alert">
+        <div class="alert-content">
+          <span class="alert-icon">⚠️</span>
+          <span id="hardwareAlertMsg">CẢNH BÁO: Lap không nhận được tín hiệu từ phần cứng ESP8266! Thiết bị đang ngoại tuyến.</span>
+        </div>
+        <button class="alert-retry-btn" type="button" onclick="checkHardwareStatus()">Kiểm tra lại</button>
+      </div>
+
+      <!--hiển thị dữ liệu cảm biến-->
+      <section class="summary-grid">
+        <article class="summary-card temp-card" id="tempCard">
+          <div class="summary-top"><span class="summary-icon">♨</span><span class="status-badge normal" id="tempStatus">Normal</span></div>
+          <div class="summary-value"><span id="tempNow">--</span><small>°C</small></div>
+          <div class="summary-label">Temperature</div>
+        </article>
+        <article class="summary-card humidity-card" id="humCard">
+          <div class="summary-top"><span class="summary-icon">◉</span><span class="status-badge normal" id="humStatus">Normal</span></div>
+          <div class="summary-value"><span id="humNow">--</span><small>%</small></div>
+          <div class="summary-label">Relative Humidity</div>
+        </article>
+        <article class="summary-card light-card" id="lightCard">
+          <div class="summary-top"><span class="summary-icon">☼</span><span class="status-badge normal" id="lightStatus">Normal</span></div>
+          <div class="summary-value"><span id="lightNow">--</span><small>LDR</small></div>
+          <div class="summary-label">Light Level</div>
+        </article>
+      </section>
+
+      <section class="dashboard-lower">
+        <article class="white-panel chart-panel">
+          <h2>Sensor History</h2>
+          <div class="chart-wrap"><canvas id="sensorChart"></canvas></div>
+        </article>
+        <article class="white-panel device-control-panel">
+          <h2><span class="power-icon">⏻</span> Device Control</h2>
+          <div class="device-list">
+            <div class="device-row" data-device="ESP8266_01" id="deviceRowLight">
+              <div class="device-name">
+                <span class="device-bulb off" id="deviceBulbLight">💡</span>
+                <span>Smart Light</span>
+              </div>
+              <button class="switch off" id="lightSwitch" type="button" aria-label="Bật tắt Smart Light"><span></span></button>
+              <span class="device-state off" id="deviceStateText">OFF</span>
+            </div>
+          </div>
+        </article>
+      </section>
+    </main>
+  </div>
+  <div class="toast-container" id="toastContainer"></div>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Home - DataSensor</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="side-brand" href="dashboard.html"><span class="brand-mark">N</span><span>Smart Home</span></a>
+      <nav class="side-nav">
+        <a href="dashboard.html" data-page="dashboard"><span class="nav-symbol"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></span><span>Dashboard</span></a>
+        <a href="sensor-data.html" data-page="sensor"><span class="nav-symbol"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="12" cy="12" r="3"/><path d="M12 3v3m0 12v3m9-9h-3M6 12H3"/></svg></span><span>Datasensor</span></a>
+        <a href="device-history.html" data-page="history"><span class="nav-symbol"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h10a2 2 0 0 1 2 2v14l-5-3-5 3V6a2 2 0 0 1 2-2Z"/><path d="M4 7a2 2 0 0 0-2 2v11l4-2"/></svg></span><span>Action history</span></a>
+        <a href="profile.html" data-page="profile"><span class="nav-symbol"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3"/><path d="M5 21c.8-4 3.1-6 7-6s6.2 2 7 6"/></svg></span><span>Profile</span></a>
+      </nav>
+      <button class="side-logout" type="button" onclick="logout()"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 4H5v16h5"/><path d="m14 8 4 4-4 4m4-4H9"/></svg><span>Log out</span></button>
+    </aside>
+
+    <main class="workspace records-workspace">
+      <header class="topbar">
+        <h1>DataSensor</h1>
+        <label class="top-search"><input type="search" placeholder="Search type of keywords"><span>⌕</span></label>
+        <div class="top-actions"><button type="button">?</button><button type="button">♟</button><span class="user-dot"></span><span class="top-username" id="topUsername">Huyền</span><span class="chev" aria-hidden="true"></span></div>
+      </header>
+
+      <section class="filter-panel">
+        <div class="filter-title-row"><h2>Bộ lọc</h2></div>
+        <div class="filter-controls sensor-filter-controls">
+          <label class="filter-field">Loại lọc
+            <select id="sensorFilter" class="filter-select" aria-label="Loại lọc">
+              <option value="all">Tất cả</option>
+              <option value="temperature">Nhiệt độ</option>
+              <option value="humidity">Độ ẩm</option>
+              <option value="light">Ánh sáng</option>
+              <option value="time">Thời gian</option>
+            </select>
+          </label>
+          <label class="filter-field">Giá trị
+            <input id="sensorQuery" class="big-input" type="text" placeholder="">
+          </label>
+          <button class="search-action" id="sensorSearch" type="button">Tìm kiếm</button>
+          <button class="reset-action" id="sensorReset" type="button">Đặt lại</button>
+        </div>
+      </section>
+
+      <section class="data-panel">
+        <div class="table-scroller">
+          <table class="dark-table">
+            <thead><tr><th>ID</th><th>Loại cảm biến</th><th>Giá trị</th><th>Thời gian</th></tr></thead>
+            <tbody id="sensorRows"></tbody>
+          </table>
+        </div>
+        <div class="table-footer">
+          <label>Hiển thị <select id="sensorLines"><option value="1">1</option><option value="5">5</option><option value="10" selected>10</option></select> bản ghi</label>
+          <span id="sensorRecords" class="records-text"></span>
+          <div class="pagination" id="sensorPages"></div>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="js/common.js"></script>
+  <script src="js/sensor-data.js"></script>
+</body>
+</html>

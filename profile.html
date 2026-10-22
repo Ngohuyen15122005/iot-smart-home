@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Home - Profile</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="profile-page">
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="side-brand" href="dashboard.html"><span class="brand-mark">N</span><span>Smart Home</span></a>
+      <nav class="side-nav">
+        <a href="dashboard.html" data-page="dashboard"><span class="nav-symbol"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></span><span>Dashboard</span></a>
+        <a href="sensor-data.html" data-page="sensor"><span class="nav-symbol"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="12" cy="12" r="3"/><path d="M12 3v3m0 12v3m9-9h-3M6 12H3"/></svg></span><span>Datasensor</span></a>
+        <a href="device-history.html" data-page="history"><span class="nav-symbol"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h10a2 2 0 0 1 2 2v14l-5-3-5 3V6a2 2 0 0 1 2-2Z"/><path d="M4 7a2 2 0 0 0-2 2v11l4-2"/></svg></span><span>Action history</span></a>
+        <a href="profile.html" data-page="profile"><span class="nav-symbol"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3"/><path d="M5 21c.8-4 3.1-6 7-6s6.2 2 7 6"/></svg></span><span>Profile</span></a>
+      </nav>
+      <button class="side-logout" type="button" onclick="logout()"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 4H5v16h5"/><path d="m14 8 4 4-4 4m4-4H9"/></svg><span>Log out</span></button>
+    </aside>
+
+    <main class="workspace profile-workspace">
+      <header class="topbar">
+        <h1>Profile</h1>
+        <label class="top-search"><input type="search" placeholder="Search type of keywords"><span>⌕</span></label>
+        <div class="top-actions"><button type="button">?</button><button type="button">♟</button><span class="user-dot"></span><span class="top-username" id="topUsername">Huyền</span><span class="chev" aria-hidden="true"></span></div>
+      </header>
+
+      <section class="profile-layout">
+        <article class="profile-left-panel">
+          <div class="avatar-wrapper" title="Bấm để tải ảnh đại diện từ máy tính" onclick="document.getElementById('avatarFileInput').click()">
+            <div class="default-avatar" id="avatarDisplay" aria-label="Avatar người dùng">
+              <span id="avatarPlaceholder">Avatar</span>
+            </div>
+            <div class="avatar-hover-tip">📷 Đổi ảnh</div>
+          </div>
+          <input type="file" id="avatarFileInput" accept="image/*" style="display:none">
+          <h2 id="profileFullNameLeft">Ngô Thị Thanh Huyền</h2>
+          <p class="student-code" id="profileStudentIdLeft">B23DCAT140</p>
+          <p class="profile-role" id="profileRoleLeft">Quản lý hệ thống Smart Home IoT,<br>giám sát cảm biến và điều khiển thiết bị</p>
+          <button type="button" class="edit-profile-btn" id="btnOpenEditProfileModal">✏️ Chỉnh sửa hồ sơ</button>
+        </article>
+
+        <div class="profile-right">
+          <article class="profile-info-panel">
+            <h2>Thông tin cá nhân</h2>
+            <p><strong>Họ và tên:</strong> <span id="profileFullName">Ngô Thị Thanh Huyền</span></p>
+            <p><strong>Mã sinh viên:</strong> <span id="profileStudentId">B23DCAT140</span></p>
+            <p><strong>Email:</strong> <span id="profileEmail">ngohuyen15122005@gmail.com</span></p>
+            <p><strong>Số điện thoại:</strong> <span id="profilePhone">1234567890</span></p>
+          </article>
+
+          <article class="project-panel">
+            <h2>Liên kết dự án</h2>
+            <div class="project-links">
+              <a href="https://github.com/huyenngoiot/iot_smart_home" id="githubLink" target="_blank" rel="noopener noreferrer" aria-label="Github Repository">
+                <span class="project-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.69c-2.78.6-3.37-1.18-3.37-1.18-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.04 1.53 1.04.9 1.54 2.35 1.1 2.92.84.09-.65.35-1.1.63-1.35-2.22-.25-4.56-1.11-4.56-4.95 0-1.09.39-1.99 1.03-2.69-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.03a9.52 9.52 0 0 1 5 0c1.91-1.3 2.75-1.03 2.75-1.03.55 1.38.2 2.4.1 2.65.64.7 1.03 1.6 1.03 2.69 0 3.85-2.34 4.69-4.57 4.94.36.31.68.91.68 1.84v2.73c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg></span>
+                <span><strong>Github Repository</strong><small id="githubSubText">Source code repository</small></span>
+              </a>
+
+              <!-- MỤC LIÊN KẾT POSTMAN DOCUMENTATION -->
+              <div class="postman-project-wrap">
+                <a href="https://documenter.getpostman.com/view/iot-smart-home-bth1" id="postmanDocLink" target="_blank" rel="noopener noreferrer" aria-label="API Documentation Postman">
+                  <span class="project-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m8 8-4 4 4 4M16 8l4 4-4 4M14 5l-4 14"/></svg></span>
+                  <span><strong>Postman API Documentation</strong><small id="postmanUrlText">https://documenter.getpostman.com/view/iot-smart-home-bth1</small></span>
+                </a>
+                <div class="postman-actions-row">
+                  <button type="button" class="postman-btn edit-btn" id="btnOpenPostmanModal">✏️ Gắn / Sửa link Postman</button>
+                  <a href="Smart_Home_IoT_APIs.postman_collection.json" download="Smart_Home_IoT_APIs.postman_collection.json" class="postman-btn download-btn">📥 Tải Collection (.json)</a>
+                </div>
+              </div>
+
+              <a href="https://www.figma.com/design/5eoJQUyOmW9yYLKecgPLzn/Figma-UI-kit---Smart-Home-Dashboard--Community---Community-?node-id=301-73213&amp;p=f&amp;t=iRhg7tigeUiSrl73-0" id="figmaLink" target="_blank" rel="noopener noreferrer" aria-label="Mở thiết kế Figma trong tab mới">
+                <span class="project-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 2h4v4H8a2 2 0 1 1 0-4Zm4 0h4a2 2 0 1 1 0 4h-4V2Zm-4 6h4v4H8a2 2 0 1 1 0-4Zm4 0h4a2 2 0 1 1 0 4h-4V8Zm-4 6h4v4a2 2 0 1 1-4 0v-4Z"/></svg></span>
+                <span><strong>Figma.com</strong><small>IoT Monitoring UI</small></span>
+              </a>
+
+              <a href="BTH1_IoT&UD.docx" id="reportLink" download="BTH1_IoT&UD.docx" aria-label="Tải tài liệu báo cáo BTH1">
+                <span class="project-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6Z"/><path d="M14 2v6h6M8 13h8M8 17h8"/></svg></span>
+                <span><strong>Tài liệu báo cáo</strong><small id="reportSubText">BTH1_IoT&UD.docx</small></span>
+              </a>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Modal Chỉnh sửa thông tin cá nhân & Liên kết -->
+  <div class="modal-overlay" id="editProfileModal">
+    <div class="postman-modal-box" style="width:min(540px,100%);max-height:90vh;overflow-y:auto">
+      <div class="modal-header">
+        <h3>Chỉnh sửa hồ sơ cá nhân</h3>
+        <button type="button" class="modal-close-btn" id="btnCloseEditProfileModal">&times;</button>
+      </div>
+      <div class="modal-body" style="display:grid;gap:12px">
+        <div>
+          <label>Họ và tên:</label>
+          <input type="text" id="inputEditFullName" placeholder="Ngô Thị Thanh Huyền">
+        </div>
+        <div>
+          <label>Mã sinh viên:</label>
+          <input type="text" id="inputEditStudentId" placeholder="B23DCAT140">
+        </div>
+        <div>
+          <label>Email:</label>
+          <input type="email" id="inputEditEmail" placeholder="ngohuyen15122005@gmail.com">
+        </div>
+        <div>
+          <label>Số điện thoại:</label>
+          <input type="text" id="inputEditPhone" placeholder="1234567890">
+        </div>
+        <div>
+          <label>Vai trò / Nhiệm vụ:</label>
+          <input type="text" id="inputEditRole" placeholder="Quản lý hệ thống Smart Home IoT...">
+        </div>
+        <div>
+          <label>Link Github Repository:</label>
+          <input type="url" id="inputEditGithub" placeholder="https://github.com/...">
+        </div>
+        <div>
+          <label>Link Figma Design:</label>
+          <input type="url" id="inputEditFigma" placeholder="https://www.figma.com/...">
+        </div>
+        <div>
+          <label>Tên file báo cáo đính kèm (trong thư mục dự án):</label>
+          <input type="text" id="inputEditReport" placeholder="BTH1_IoT&UD.docx">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="modal-cancel-btn" id="btnCancelEditProfileModal">Hủy</button>
+        <button type="button" class="modal-save-btn" id="btnSaveProfileInfo">Lưu thay đổi</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal cấu hình Link Postman -->
+  <div class="modal-overlay" id="postmanModal">
+    <div class="postman-modal-box">
+      <div class="modal-header">
+        <h3>Gắn liên kết Postman Documentation</h3>
+        <button type="button" class="modal-close-btn" id="btnClosePostmanModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <label for="postmanInput">Đường dẫn Postman Documentation / Workspace:</label>
+        <input type="url" id="postmanInput" placeholder="https://documenter.getpostman.com/view/..." value="">
+        <p class="modal-note">
+          💡 <strong>Hướng dẫn:</strong> Bạn có thể chia sẻ collection trên Postman bằng cách bấm nút <em>Share</em> &gt; <em>Publish Docs</em> hoặc <em>Via API Network</em>, sau đó dán đường dẫn vào đây để gắn link sản phẩm vào Profile của bạn.
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="modal-cancel-btn" id="btnCancelPostmanModal">Hủy</button>
+        <button type="button" class="modal-save-btn" id="btnSavePostmanLink">Lưu liên kết</button>
+      </div>
+    </div>
+  </div>
+  <div class="toast-container" id="toastContainer"></div>
+  <script src="js/common.js"></script>
+  <script src="js/profile.js"></script>
+</body>
+</html>

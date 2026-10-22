@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Home - Đăng nhập</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="login-page">
+  <main class="login-screen">
+    <section class="login-box" aria-labelledby="welcomeTitle">
+      <h1 id="welcomeTitle">Welcome</h1>
+      <div class="login-brand">
+        <span class="brand-mark brand-mark-large">N</span>
+        <span>Smart Home</span>
+      </div>
+      <h2>Đăng nhập hệ thống</h2>
+
+      <form id="loginForm" novalidate>
+        <label for="username">Tên đăng nhập</label>
+        <div class="login-input-wrap">
+          <span class="field-icon">♙</span>
+          <input id="username" name="username" type="text" value="Huyền" autocomplete="username" aria-label="Tên đăng nhập">
+        </div>
+
+        <label for="password">Mật khẩu</label>
+        <div class="login-input-wrap">
+          <span class="field-icon lock-icon">▢</span>
+          <input id="password" name="password" type="password" value="12345678" autocomplete="current-password" aria-label="Mật khẩu">
+          <button class="show-password" id="togglePassword" type="button" aria-label="Hiện hoặc ẩn mật khẩu">◉</button>
+        </div>
+
+        <label class="remember-row">
+          <input id="rememberMe" type="checkbox">
+          <span>Ghi nhớ đăng nhập</span>
+        </label>
+
+        <button class="login-submit" type="submit">Đăng nhập</button>
+        <button class="forgot-btn" id="forgotPassword" type="button">Quên mật khẩu?</button>
+        <div class="login-message" id="loginMessage" role="status"></div>
+      </form>
+    </section>
+  </main>
+  <script src="js/login.js"></script>
+</body>
+</html>

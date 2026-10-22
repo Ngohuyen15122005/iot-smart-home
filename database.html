@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Home - MySQL Database</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .db-header-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      margin: 14px 0 22px;
+    }
+    .db-card {
+      background: var(--panel);
+      border: 1px solid #233547;
+      border-radius: 14px;
+      padding: 14px 18px;
+      cursor: pointer;
+      transition: all .2s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .db-card:hover {
+      border-color: #38bdf8;
+      transform: translateY(-2px);
+    }
+    .db-card.active {
+      border-color: #38bdf8;
+      background: linear-gradient(145deg, #132232, #0d1622);
+      box-shadow: 0 4px 16px rgba(56, 189, 248, 0.15);
+    }
+    .db-card-name {
+      font-size: 14px;
+      font-weight: 800;
+      color: #f1f5f9;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .db-card-badge {
+      background: #0284c7;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 10px;
+    }
+    .db-card-desc {
+      font-size: 12px;
+      color: #94a3b8;
+      margin-top: 6px;
+      line-height: 1.35;
+    }
+    .db-schema-panel {
+      background: #08101a;
+      border: 1px solid #1a2c3d;
+      border-radius: 12px;
+      padding: 12px 18px;
+      margin-bottom: 18px;
+      font-size: 12px;
+      color: #cbd5e1;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .db-schema-tag {
+      background: #142436;
+      border: 1px solid #25405d;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-family: monospace;
+      color: #7dd3fc;
+    }
+    .db-action-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .db-live-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #10b981;
+    }
+    .db-live-badge .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 8px #10b981;
+    }
+  </style>
+</head>
+<body class="database-page">
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="side-brand" href="dashboard.html"><span class="brand-mark">N</span><span>Smart Home</span></a>
+      <nav class="side-nav">
+        <a href="dashboard.html" data-page="dashboard"><span class="nav-symbol"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></span><span>Dashboard</span></a>
+        <a href="sensor-data.html" data-page="sensor"><span class="nav-symbol"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="12" cy="12" r="3"/><path d="M12 3v3m0 12v3m9-9h-3M6 12H3"/></svg></span><span>Datasensor</span></a>
+        <a href="device-history.html" data-page="history"><span class="nav-symbol"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h10a2 2 0 0 1 2 2v14l-5-3-5 3V6a2 2 0 0 1 2-2Z"/><path d="M4 7a2 2 0 0 0-2 2v11l4-2"/></svg></span><span>Action history</span></a>
+        <a href="profile.html" data-page="profile"><span class="nav-symbol"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3"/><path d="M5 21c.8-4 3.1-6 7-6s6.2 2 7 6"/></svg></span><span>Profile</span></a>
+        <a href="database.html" data-page="database" class="active"><span class="nav-symbol"><svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></span><span>MySQL DB</span></a>
+      </nav>
+      <button class="side-logout" type="button" onclick="logout()"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 4H5v16h5"/><path d="m14 8 4 4-4 4m4-4H9"/></svg><span>Log out</span></button>
+    </aside>
+
+    <main class="workspace records-workspace">
+      <header class="topbar">
+        <h1>MySQL Database</h1>
+        <label class="top-search"><input type="search" placeholder="Search database keywords"><span>⌕</span></label>
+        <div class="top-actions">
+          <div class="db-live-badge">
+            <span class="dot"></span>
+            <span>MySQL Port 3306 (iot_smart_home)</span>
+          </div>
+          <button type="button" title="Trợ giúp">?</button>
+          <button type="button" title="Cài đặt">♟</button>
+          <span class="user-dot"></span>
+          <span class="top-username" id="topUsername">Huyền</span>
+          <span class="chev" aria-hidden="true"></span>
+        </div>
+      </header>
+
+      <!-- Danh sách các bảng trong MySQL -->
+      <section class="db-header-cards" id="dbTableCards" aria-label="Danh sách bảng MySQL"></section>
+
+      <!-- Thanh hành động và cấu trúc cột -->
+      <div class="db-action-bar">
+        <div>
+          <h2 id="currentTableTitle" style="margin:0; font-size:18px; color:#fff; display:inline-block; margin-right:12px;">Bảng: datasensor</h2>
+          <span id="currentTableCountBadge" class="db-card-badge" style="vertical-align:middle;">0 bản ghi</span>
+        </div>
+        <div style="display:flex; gap:10px;">
+          <button type="button" class="sim-btn" onclick="refreshCurrentTable()" style="padding:8px 14px;">
+            <span>🔄 Làm mới dữ liệu từ MySQL</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="db-schema-panel" id="dbSchemaPanel">
+        <strong style="color:#e2e8f0;">Cấu trúc cột:</strong>
+        <span id="dbSchemaTags">Đang tải...</span>
+      </div>
+
+      <!-- Bảng hiển thị dữ liệu trực tiếp từ MySQL -->
+      <section class="data-panel" style="min-height:450px;">
+        <div class="table-scroller">
+          <table class="dark-table" id="dbDataTable">
+            <thead id="dbTableHead"><tr><th>Đang tải...</th></tr></thead>
+            <tbody id="dbTableBody"><tr><td style="text-align:center; padding:30px;">Đang tải dữ liệu từ MySQL...</td></tr></tbody>
+          </table>
+        </div>
+        <div class="table-footer">
+          <label>Hiển thị <select id="dbLinesSelect"><option value="5">5</option><option value="10" selected>10</option><option value="20">20</option><option value="50">50</option></select> dòng/trang</label>
+          <span id="dbRecordsText" class="records-text"></span>
+          <div class="pagination" id="dbPages"></div>
+        </div>
+      </section>
+    </main>
+  </div>
+  <div class="toast-container" id="toastContainer"></div>
+  <script src="js/common.js"></script>
+  <script src="js/database.js"></script>
+</body>
+</html>
